@@ -1,9 +1,36 @@
-{% extends 'base.html'%}
-
+{% extends 'base.html' %}
 {% block head %}
-
+<title>Fazer coisas</title>
 {% endblock %}
 
 {% block body %}
-<h1>Template</h1>
+<div class="content">
+	<h1 style="text-align: center">Task Master</h1>
+
+	<table style="border: 1px solid #aaa; border-collapse: collapse; width: 100%;">
+		<tr style="border: 1px solid #aaa; height: 30px;">
+		<!-- aqui criamos a tabela e rows-->
+			<th>Task</th>
+			<th>Added</th>
+			<th>Action</th>
+		</tr>
+		{% for task in tasks %}
+			<tr>
+				<td style="text-align: center; padding: 5px;">{{ task.content }}</td>
+				<td style="text-align: center; padding: 5px;">{{ task.date_created.date() }}</td>
+				<td style="text-align: center; padding: 5px;">
+					<a href="/delete/{{task.id}}">Delete</a>
+					<br>
+					<a href="/update/{{task.id}}">Update</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+	<form style="margin-top: 20px;" action="/" method="POST">
+		<input type="text" name="content" id="content">
+		<input type="submit" value="Add task">
+	</form>
+</div>
+
 {% endblock %}
